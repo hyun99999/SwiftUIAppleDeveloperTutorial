@@ -15,7 +15,7 @@ struct LandmarkList: View {
             //        or by making your data type conform to the Identifiable protocol.
             List(landmarks) { landmark in
                 NavigationLink {
-                    LandmarkDetail()
+                    LandmarkDetail(landmark: landmark)
                 } label: {
                     LandmarkRow(landmark: landmark)
                 }
