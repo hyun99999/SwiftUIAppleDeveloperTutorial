@@ -21,11 +21,28 @@ struct LandmarkList: View {
             //        You can make your data identifiable in
             //        one of two ways: by passing along with your data a key path to a property that uniquely identifies each element,
             //        or by making your data type conform to the Identifiable protocol.
+            /*
             List(filteredLandmarks) { landmark in
                 NavigationLink {
                     LandmarkDetail(landmark: landmark)
                 } label: {
                     LandmarkRow(landmark: landmark)
+                }
+             }
+             */
+            
+            // To combine static and dynamic views in a list, or to combine two or more different groups of dynamic views, use the ForEach type instead of passing your collection of data to List.
+            List {
+                Toggle(isOn: $showFavoritesOnly) {
+                    Text("Favorites only")
+                }
+                
+                ForEach(filteredLandmarks) { landmark in
+                    NavigationLink {
+                        LandmarkDetail(landmark: landmark)
+                    } label: {
+                        LandmarkRow(landmark: landmark)
+                    }
                 }
             }
             .navigationTitle("Landmarks")
