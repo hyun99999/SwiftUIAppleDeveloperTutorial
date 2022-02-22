@@ -14,7 +14,7 @@ final class ModelData: ObservableObject {
     
     // Q.why not use @Publised?
     // A.you’ll never modify hike data after initially loading it, you don’t need to mark it with the @Published attribute.
-    var hikes: [Hike] = load("hike.json")
+    var hikes: [Hike] = load("hikeData.json")
 }
 
 func load<T: Decodable>(_ filename: String) -> T {
