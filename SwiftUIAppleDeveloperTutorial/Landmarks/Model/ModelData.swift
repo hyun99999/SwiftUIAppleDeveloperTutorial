@@ -11,6 +11,10 @@ import Combine
 final class ModelData: ObservableObject {
     // An observable object needs to publish any changes to its data, so that its subscribers can pick up the change.
     @Published var landmarks: [Landmark] = load("landmarkData.json")
+    
+    // Q.why not use @Publised?
+    // A.you’ll never modify hike data after initially loading it, you don’t need to mark it with the @Published attribute.
+    var hikes: [Hike] = load("hike.json")
 }
 
 func load<T: Decodable>(_ filename: String) -> T {
