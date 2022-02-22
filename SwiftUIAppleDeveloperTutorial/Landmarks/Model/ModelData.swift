@@ -15,6 +15,8 @@ final class ModelData: ObservableObject {
     // Q.why not use @Publised?
     // A.you’ll never modify hike data after initially loading it, you don’t need to mark it with the @Published attribute.
     var hikes: [Hike] = load("hikeData.json")
+    // user profile that persists even after the user dismisses the profile view.
+    @Published var profile = Profile.default
     
     var features: [Landmark] {
         landmarks.filter {$0.isFeatured }
