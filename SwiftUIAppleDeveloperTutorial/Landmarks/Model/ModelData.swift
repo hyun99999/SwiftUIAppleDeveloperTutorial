@@ -16,6 +16,10 @@ final class ModelData: ObservableObject {
     // A.you’ll never modify hike data after initially loading it, you don’t need to mark it with the @Published attribute.
     var hikes: [Hike] = load("hikeData.json")
     
+    var features: [Landmark] {
+        landmarks.filter {$0.isFeatured }
+    }
+    
     var categories: [String: [Landmark]] {
         Dictionary(
             grouping: landmarks,
