@@ -7,6 +7,16 @@ A view displaying information about a hike, including an elevation graph.
 
 import SwiftUI
 
+// This keeps your code clean as you expand the custom transition.
+extension AnyTransition {
+    static var moveAndFade: AnyTransition {
+        // provide different transitions for when the view appears and disappears.
+        .asymmetric(
+            insertion: .move(edge: .trailing).combined(with: .opacity),
+            removal: scale.combined(with: .opacity))
+    }
+}
+
 struct HikeView: View {
     var hike: Hike
     @State private var showDetail = false
@@ -26,18 +36,23 @@ struct HikeView: View {
                 Spacer()
 
                 Button {
-                    showDetail.toggle()
+                    // Both of the views affected by the showDetail property now have animated transitions
+                    withAnimation {
+                        showDetail.toggle()
+                    }
                 } label: {
                     Label("Graph", systemImage: "chevron.right.circle")
                         .labelStyle(.iconOnly)
                         .imageScale(.large)
                         .rotationEffect(.degrees(showDetail ? 90 : 0))
+                        .scaleEffect(showDetail ? 1.5 : 1)
                         .padding()
                 }
             }
 
             if showDetail {
                 HikeDetail(hike: hike)
+                    .transition(.moveAndFade)
             }
         }
     }
